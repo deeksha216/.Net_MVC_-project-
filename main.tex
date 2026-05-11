@@ -1,0 +1,309 @@
+%% ============================================================
+%%  NITTE Institute of Professional Education
+%%  BCA Final Year Project Report Template
+%%  Professional LaTeX Version
+%% ============================================================
+\documentclass[12pt, a4paper]{report}
+
+%% ── Packages ────────────────────────────────────────────────
+\usepackage[a4paper, top=1in, bottom=1in, left=1.25in, right=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{eso-pic}   % page border on every page
+
+%% ── Clickable links / TOC / LOF / LOT ──────────────────────
+\usepackage[
+  colorlinks  = true,
+  linkcolor   = blue!70!black,
+  urlcolor    = blue!70!black,
+  citecolor   = blue!70!black,
+  bookmarks   = true,
+  bookmarksnumbered = true,
+  pdftitle    = {BCA Final Year Project Report},
+  pdfauthor   = {Student Name},
+  pdfsubject  = {Project Report},
+]{hyperref}
+
+%% ── Page border on every page ───────────────────────────────
+\definecolor{borderblue}{RGB}{26, 35, 126}
+
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[overlay, remember picture]
+    %% outer thick border
+    \draw[borderblue, line width=2.2pt]
+      ([xshift=10mm, yshift=-10mm]current page.north west) rectangle
+      ([xshift=-10mm, yshift=10mm]current page.south east);
+    %% inner thin border
+    \draw[borderblue!50, line width=0.7pt]
+      ([xshift=12.5mm, yshift=-12.5mm]current page.north west) rectangle
+      ([xshift=-12.5mm, yshift=12.5mm]current page.south east);
+  \end{tikzpicture}%
+}
+
+%% ── Section title formatting ────────────────────────────────
+\titleformat{\chapter}[display]
+  {\normalfont\large\bfseries\centering}
+  {Chapter \thechapter}{10pt}{\large\bfseries}
+\titlespacing*{\chapter}{0pt}{30pt}{20pt}
+
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+%% ── Section numbering style (start from 1, not 0.1) ─────────
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+%% ── Header / Footer ─────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\nouppercase{\rightmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+%% ── Line spacing ────────────────────────────────────────────
+\onehalfspacing
+
+%% ── Misc ────────────────────────────────────────────────────
+\captionsetup{font=small, labelfont=bf}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+%% ============================================================
+\begin{document}
+
+%% ============================================================
+%%  TITLE PAGE
+%% ============================================================
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+
+    \includegraphics[width=0.80\textwidth]{88ae5ffa-74ae-4229-8f17-8fee2c643e51.png}\\[12pt]
+
+    \rule{\linewidth}{0.8pt}\\[6pt]
+    {\large\bfseries NITTE (Deemed to be UNIVERSITY)}\\[6pt]
+    \rule{\linewidth}{0.8pt}\\[24pt]
+
+    {\large\bfseries A Project Report On}\\[12pt]
+
+    {\Large\bfseries ``Project Title''}\\[24pt]
+
+    {\normalsize\bfseries Submitted in partial fulfillment of the requirements for the degree of}\\[8pt]
+
+    {\large\bfseries Bachelor of Computer Applications (BCA)}\\[6pt]
+    {\normalsize\bfseries Nitte (Deemed to be University)}\\[24pt]
+
+    {\normalsize\bfseries By}\\[10pt]
+    {\large\bfseries NAME}\\[4pt]
+    {\normalsize\bfseries (USN NO)}\\[24pt]
+
+    {\normalsize\bfseries Under the guidance of}\\[8pt]
+    {\large\bfseries (Guide name)}\\[4pt]
+    {\normalsize\bfseries (Designation)}\\[36pt]
+
+    {\normalsize\bfseries Department of Computer Applications}\\[4pt]
+    {\normalsize\bfseries Nitte Institute of Professional Education}\\[4pt]
+    {\normalsize\bfseries Nitte (Deemed to be University)}\\[4pt]
+    {\normalsize\bfseries Kodakal, Kannur Post,}\\[4pt]
+    {\normalsize\bfseries Mangalore -- 575007}\\[20pt]
+
+    {\normalsize\bfseries 2024--2025}
+
+  \end{center}
+\end{titlepage}
+
+%% ============================================================
+%%  CERTIFICATE
+%% ============================================================
+\clearpage
+\thispagestyle{plain}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+
+\begin{center}
+  {\Large\bfseries CERTIFICATE}
+\end{center}
+\vspace{14pt}
+
+This is to certify that the project report entitled (\textbf{ENTER PROJECT TITLE}) is submitted to Nitte Institute of Professional Education, Nitte (Deemed to be University) in partial fulfillment of the requirement for the award of the degree of BACHELOR OF COMPUTER APPLICATIONS (BCA).
+
+The report is an original work carried out by Mr./Ms.\ [Name], USN No.\ [USN], under my guidance.
+
+The matter embodied in this project is authentic and is genuine work done by the student and has not been submitted to this University, or to any other University / Institute for the fulfillment of the requirement of any course of study.
+
+
+\vspace{36pt}
+\noindent
+\begin{tabular}{@{}p{0.45\textwidth}p{0.45\textwidth}@{}}
+  Signature of the Principal: & \\[24pt]
+  Date: & \\[8pt]
+  Place: & \\
+\end{tabular}
+
+\vspace{36pt}
+\noindent
+\begin{tabular}{@{}p{0.45\textwidth}p{0.45\textwidth}@{}}
+  Signature of the Guide: & \\[24pt]
+  Date: & \\[8pt]
+  Place: & \\
+\end{tabular}
+
+%% ============================================================
+%%  ACKNOWLEDGEMENT
+%% ============================================================
+\clearpage
+\begin{center}
+  {\Large\bfseries ACKNOWLEDGEMENT}
+\end{center}
+\vspace{14pt}
+
+We would like to sincerely thank all the people who were directly or indirectly involved in this project; without their help, the completion of this project would have been impossible.
+
+We thank whole heartedly our beloved principal of Nitte Institute of Professional Education, Mangalore, \textbf{Dr.\ Jnaneshwar Pai Maroor,} for all this possible support by providing facilities to complete our project.
+
+We thank \textbf{Mr.Ramamoorthy H } Course Coordinator, Assistant Professor, Department of Computer Applications, for his valuable guidance and the extra effort that he is taking every time to ensure the correctness and perfection of what we are doing. We also remember all the lecturers who had been more of a support to us than ever.
+
+We thank \textbf{Dr.Amrithkala M Shetty} and \textbf{Mr Kishore S}, Project Coordinator, Assistant Professor, Department of Computer Applications, for her continuous encouragement, valuable feedback, and support throughout our project.
+
+We thank \textbf{(Guide Name),} Assistant Professor in the Computer Science Department, who has guided us and provided support and genuine replies to our queries. He/She has not only guided us in the project but also helped us by providing suggestions and interest in helping us to complete our project, which has led to the successful result of our project.
+
+Our special thanks to all friends who have provided timely help and genuine feedbacks which helped us improve a lot.
+
+Finally, we thank our parents, who supported us throughout the project and provided the support that we needed throughout our life.
+
+\vspace{30pt}
+\noindent
+\begin{tabular}{@{}p{0.45\textwidth}p{0.45\textwidth}@{}}
+  Place: Padil & By, \\[8pt]
+  Date: & (Name) \\
+\end{tabular}
+
+%% ============================================================
+%%  INDEX (TABLE OF CONTENTS)
+%% ============================================================
+\clearpage
+\renewcommand{\contentsname}{INDEX}
+\tableofcontents
+
+%% ============================================================
+%%  LIST OF FIGURES  (clickable)
+%% ============================================================
+\clearpage
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+%% ============================================================
+%%  LIST OF TABLES  (clickable)
+%% ============================================================
+\clearpage
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+%% ============================================================
+%%  MAIN CONTENT  (Arabic page numbering starts here)
+%% ============================================================
+\clearpage
+% \pagenumbering{arabic}
+% \setcounter{page}{1}
+
+
+%% ============================================================
+%%  REPORT SECTIONS (as requested)
+%% ============================================================
+\section{Introduction}
+Write a short introduction to your project.
+
+\subsection{Objective}
+State the primary and secondary objectives of the project.
+
+\subsection{Problem Statement}
+Clearly define the problem your project solves.
+
+\section{Literature Survey}
+Summarize existing works and related systems.
+
+\section{Methodology}
+Describe the methods, workflow, and approach used.
+
+\section{Implementation}
+Explain development details and project modules.
+
+\subsection{Requirement Analysis}
+Describe overall system requirements.
+
+\subsubsection{Functional Requirement}
+List what the system must do.
+
+\subsubsection{Hardware Requirement}
+List the hardware needed for development/deployment.
+
+\subsubsection{Software Requirement}
+List software, tools, and frameworks used.
+
+\subsection{Code Snippets}
+Add important code segments and explain them.
+
+\subsection{Test Cases}
+Provide test cases, inputs, expected output, and actual output.
+
+\section{Results}
+Present outputs, screenshots, and observations.
+
+\section{Conclusion}
+Summarize the work completed and findings.
+
+\section{Future Work}
+Mention possible improvements and enhancements.
+
+\clearpage
+\begin{thebibliography}{99}
+\bibitem{ref1} Author Name, "Title of the reference," Journal/Conference, Year.
+\bibitem{ref2} Author Name, "Book/Website Title," Publisher/URL, Year.
+\end{thebibliography}
+
+%%  ── HOW TO ADD FIGURES (auto-appear as clickable links in LOF) ──
+%%
+%%  \begin{figure}[htbp]
+%%    \centering
+%%    \includegraphics[width=0.85\textwidth]{your_image.png}
+%%    \caption{Your figure caption}
+%%    \label{fig:your_label}
+%%  \end{figure}
+%%
+%%  Reference in text:  Figure~\ref{fig:your_label}
+%%
+%%  ── HOW TO ADD TABLES (auto-appear as clickable links in LOT) ──
+%%
+%%  \begin{table}[htbp]
+%%    \centering
+%%    \caption{Your table caption}
+%%    \label{tab:your_label}
+%%    \begin{tabular}{lcc}
+%%      \toprule
+%%      Column 1 & Column 2 & Column 3 \\ \midrule
+%%      Data     & Data     & Data     \\ \bottomrule
+%%    \end{tabular}
+%%  \end{table}
+%%
+%%  Reference in text:  Table~\ref{tab:your_label}
+
+\end{document}

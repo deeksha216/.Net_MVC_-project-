@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Welcome";
+    Layout = "_Layout";
+}
+
+<div class="text-center py-5">
+    <div class="mb-3">
+        <span style="font-size:4rem; color:#6366f1;"><i class="bi bi-check2-circle"></i></span>
+    </div>
+    <h1 class="fw-bold" style="color:#111827;">Build Better Habits</h1>
+    <p class="lead text-muted mt-2 mb-4">Track your daily habits, maintain streaks, and achieve your goals — all in one place.</p>
+    <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg me-3 px-4">
+        <i class="bi bi-person-plus me-2"></i>Get Started Free
+    </a>
+    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary btn-lg px-4">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+    </a>
+</div>
+
+<div class="row g-4 mt-2">
+    <div class="col-md-4">
+        <div class="card h-100 p-4 text-center border-0" style="background:#fff;">
+            <i class="bi bi-plus-circle-fill fs-1 mb-3" style="color:#6366f1;"></i>
+            <h5 class="fw-semibold">Create Habits</h5>
+            <p class="text-muted small">Add daily or weekly habits you want to build. Name them, describe your goal, set the frequency.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 p-4 text-center border-0" style="background:#fff;">
+            <i class="bi bi-fire fs-1 mb-3" style="color:#ef4444;"></i>
+            <h5 class="fw-semibold">Track Streaks</h5>
+            <p class="text-muted small">Mark habits complete every day. The app automatically calculates your current and best streak.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 p-4 text-center border-0" style="background:#fff;">
+            <i class="bi bi-bar-chart-fill fs-1 mb-3" style="color:#22c55e;"></i>
+            <h5 class="fw-semibold">View Statistics</h5>
+            <p class="text-muted small">See your completion rate, activity heatmap, and per-habit progress — all on your statistics page.</p>
+        </div>
+    </div>
+</div>

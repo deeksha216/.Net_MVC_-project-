@@ -1,0 +1,98 @@
+@model List<Habit>
+@{
+    ViewData["Title"] = "My Habits";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <div class="page-title">My Habits</div>
+        <div class="page-sub">@Model.Count active habits</div>
+    </div>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-lg me-1"></i>New Habit
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="text-center py-5">
+        <i class="bi bi-journal-plus fs-1 text-muted d-block mb-3"></i>
+        <p class="text-muted">No habits yet. Create your first one!</p>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-1"></i>Create Habit
+        </a>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Habit</th>
+                        <th>Frequency</th>
+                        <th>Streak</th>
+                        <th>Best</th>
+                        <th>Total</th>
+                        <th>Today</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var habit in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="fw-semibold small">@habit.Name</div>
+                                @if (!string.IsNullOrEmpty(habit.Description))
+                                {
+                                    <div class="text-muted" style="font-size:.75rem;">@habit.Description</div>
+                                }
+                            </td>
+                            <td><span class="badge-@habit.Frequency.ToLower()">@habit.Frequency</span></td>
+                            <td class="streak-fire"><i class="bi bi-fire me-1"></i>@habit.CurrentStreak d</td>
+                            <td class="streak-trophy"><i class="bi bi-trophy me-1"></i>@habit.LongestStreak</td>
+                            <td class="small text-muted">@habit.TotalCompletions</td>
+                            <td>
+                                @if (habit.CompletedToday)
+                                {
+                                    <span class="badge-done"><i class="bi bi-check me-1"></i>Done</span>
+                                }
+                                else
+                                {
+                                    <span class="badge-pending">Pending</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <a asp-action="Details" asp-route-id="@habit.Id"
+                                       class="btn btn-sm btn-outline-secondary" title="Details">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@habit.Id"
+                                       class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form asp-action="ToggleComplete" asp-route-id="@habit.Id" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-success" title="Toggle Complete">
+                                            <i class="bi bi-check2"></i>
+                                        </button>
+                                    </form>
+                                    <form asp-action="Delete" asp-route-id="@habit.Id" method="post" class="d-inline"
+                                          onsubmit="return confirm('Delete \'@habit.Name\'? This cannot be undone.')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

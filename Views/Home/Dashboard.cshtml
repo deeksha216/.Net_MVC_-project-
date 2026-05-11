@@ -1,0 +1,101 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-1">
+    <div>
+        <div class="page-title">Good day, @Model.UserName!</div>
+        <div class="page-sub">@DateTime.Now.ToString("dddd, MMMM dd") &middot; @Model.CompletedToday of @Model.TotalHabits habits completed today</div>
+    </div>
+    <a asp-controller="Habits" asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-lg me-1"></i>Add Habit
+    </a>
+</div>
+
+<div class="row g-3 mt-1 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-num" style="color:#6366f1;">@Model.TotalHabits</div>
+            <div class="stat-label">Total Habits</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-num" style="color:#22c55e;">@Model.CompletedToday</div>
+            <div class="stat-label">Done Today</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-num" style="color:#ef4444;">@Model.BestStreak</div>
+            <div class="stat-label">Best Streak</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-num" style="color:#f59e0b;">@Model.TotalCompletionsAllTime</div>
+            <div class="stat-label">All-Time Done</div>
+        </div>
+    </div>
+</div>
+
+@if (Model.TotalHabits > 0)
+{
+    <div class="mb-1 d-flex justify-content-between align-items-center">
+        <small class="text-muted">Today's progress</small>
+        <small class="fw-semibold" style="color:#6366f1;">
+            @(Model.TotalHabits > 0 ? (int)Math.Round((double)Model.CompletedToday / Model.TotalHabits * 100) : 0)%
+        </small>
+    </div>
+    <div class="progress mb-4" style="height:8px;">
+        <div class="progress-bar progress-bar-custom"
+             style="width:@(Model.TotalHabits > 0 ? (int)Math.Round((double)Model.CompletedToday / Model.TotalHabits * 100) : 0)%">
+        </div>
+    </div>
+}
+
+<h6 class="fw-semibold mb-3" style="color:#374151;">Today's Habits</h6>
+
+@if (!Model.Habits.Any())
+{
+    <div class="text-center py-5">
+        <i class="bi bi-journal-plus fs-1 text-muted d-block mb-3"></i>
+        <p class="text-muted">No habits yet.</p>
+        <a asp-controller="Habits" asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-1"></i>Create your first habit
+        </a>
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var habit in Model.Habits)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="habit-card @(habit.CompletedToday ? "completed" : "")">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="fw-semibold mb-0" style="color:#111827;">@habit.Name</h6>
+                        <span class="badge-@habit.Frequency.ToLower()">@habit.Frequency</span>
+                    </div>
+                    @if (!string.IsNullOrEmpty(habit.Description))
+                    {
+                        <p class="text-muted small mb-2">@habit.Description</p>
+                    }
+                    <div class="d-flex gap-3 mb-3">
+                        <span class="streak-fire"><i class="bi bi-fire me-1"></i>@habit.CurrentStreak day streak</span>
+                        <span class="streak-trophy"><i class="bi bi-trophy me-1"></i>Best: @habit.LongestStreak</span>
+                    </div>
+                    <form asp-controller="Habits" asp-action="ToggleCompleteFromDashboard"
+                          asp-route-id="@habit.Id" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="w-100 @(habit.CompletedToday ? "btn-complete-done" : "btn-complete-todo")">
+                            <i class="bi @(habit.CompletedToday ? "bi-check-circle-fill" : "bi-circle") me-1"></i>
+                            @(habit.CompletedToday ? "Completed!" : "Mark Complete")
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}
